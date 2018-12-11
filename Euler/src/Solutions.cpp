@@ -37,15 +37,15 @@ unsigned long long p2()
 
 unsigned long long p3()
 {
-	// unsigned long long target = 600851475143;
-	unsigned long long target = 10;
+	unsigned long long x = 600851475143;
 
-	for (unsigned long long factor = 2; factor * factor <= target; factor++) {
-		while (target % factor == 0 && target != factor) {
-			target /= factor;
+	// Keep in mind the condition inside for gets evaluated every loop with the new value of x
+	for (unsigned long long factor = 2; factor * factor <= x; factor++) {
+		while (x % factor == 0 && x != factor) {
+			x /= factor;
 		}
-		std::cout << target << std::endl;
+		std::cout << x << std::endl;
 	}
 
-	return target;
+	return x;
 }
