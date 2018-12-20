@@ -44,8 +44,23 @@ unsigned long long p3()
 		while (x % factor == 0 && x != factor) {
 			x /= factor;
 		}
-		std::cout << x << std::endl;
 	}
 
 	return x;
+}
+
+unsigned long long p4() { return 0; }
+
+unsigned long long p5()
+{
+	// Calculate lcm(1, 2, ..., 20), which can be done in steps (or recursively):
+	//	= lcm(lcm(1, ..., 19), 20) = lcm(lcm(lcm(1, ..., 18), 19), 20) = ...
+	unsigned int x = 20000;
+
+	unsigned long long result = 1;
+	for (unsigned int i = 2; i <= x; i++) {
+		result = lcm(result, i);
+	}
+
+	return result;
 }

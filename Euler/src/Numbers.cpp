@@ -1,5 +1,4 @@
-#include<iostream>
-#include "Numbers.h"
+#include <iostream>
 
 unsigned long long sumNumbersBelow(unsigned long long n)
 {
@@ -14,4 +13,10 @@ unsigned long long gcd(unsigned long long a, unsigned long long b)
 		b = c;
 	}
 	return b;
+}
+
+unsigned long long lcm(unsigned long long a, unsigned long long b)
+{
+	// Parenthesis avoid overflow
+	return a * (b / gcd(a, b));
 }
