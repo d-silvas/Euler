@@ -64,3 +64,37 @@ unsigned long long p5()
 
 	return result;
 }
+
+unsigned long long p27()
+{
+	unsigned long long result;
+	unsigned long long nUpperLimit = 1000000;
+	int consecutivePrimes = 0;
+	int maxConsecutivePrimes = 0;
+
+	for (int a = -999; a <= 999; a++)
+	{
+		for (int b = -1000; b <= 1000; b++)
+		{
+			consecutivePrimes = 0;
+			for (unsigned int n = 0; n < nUpperLimit; n++)
+			{
+				if (isPrime(n*n + a*n + b))
+				{
+					consecutivePrimes++;
+				}
+				else
+				{
+					break;
+				}
+			}
+			std::cout << consecutivePrimes << std::endl;
+			if (consecutivePrimes >= maxConsecutivePrimes)
+			{
+				maxConsecutivePrimes = consecutivePrimes;
+				std::cout << "[" << consecutivePrimes << "]: a=" << a << ", b=" << b << std::endl;
+			}
+		}
+	}
+	return 0;
+}
