@@ -21,12 +21,29 @@ unsigned long long lcm(unsigned long long a, unsigned long long b)
 	return a * (b / gcd(a, b));
 }
 
+bool isPrime(long long n)
+{
+	if (n < 0) n = -n;
+	if (n <= 1) return false;
+	if (n <= 3) return true;
+
+	if (n % 2 == 0 || n % 3 == 0) return false;
+
+	for (long long i = 5; i * i <= n; i = i + 6)
+		if (n % i == 0 || n % (i + 2) == 0)
+			return false;
+
+	return true;
+}
+
 bool isPrime(unsigned long long n)
 {
 	if (n <= 1) return false;
 	if (n <= 3) return true;
 
-	for (unsigned long long i = 2; i * i <= n; i = i + 6)
+	if (n % 2 == 0 || n % 3 == 0) return false;
+
+	for (unsigned long long i = 5; i * i <= n; i = i + 6)
 		if (n % i == 0 || n % (i + 2) == 0)
 			return false;
 

@@ -65,19 +65,20 @@ unsigned long long p5()
 	return result;
 }
 
+// See http://code.jasonbhill.com/sage/project-euler-problem-27/
 unsigned long long p27()
 {
-	unsigned long long result;
-	unsigned long long nUpperLimit = 1000000;
+	long long result;
+	long long nUpperLimit = 10000;
 	int consecutivePrimes = 0;
 	int maxConsecutivePrimes = 0;
 
-	for (int a = -999; a <= 999; a++)
+	for (long long a = -999; a <= 999; a++)
 	{
-		for (int b = -1000; b <= 1000; b++)
+		for (long long b = -999; b <= 999; b += 2)
 		{
 			consecutivePrimes = 0;
-			for (unsigned int n = 0; n < nUpperLimit; n++)
+			for (long long n = 0; n < nUpperLimit; n++)
 			{
 				if (isPrime(n*n + a*n + b))
 				{
@@ -88,13 +89,71 @@ unsigned long long p27()
 					break;
 				}
 			}
-			std::cout << consecutivePrimes << std::endl;
 			if (consecutivePrimes >= maxConsecutivePrimes)
 			{
 				maxConsecutivePrimes = consecutivePrimes;
-				std::cout << "[" << consecutivePrimes << "]: a=" << a << ", b=" << b << std::endl;
+				std::cout << "[" << consecutivePrimes << "]: a=" << a << ", b=" << b 
+					<< ", ab = " << a*b <<std::endl;
 			}
 		}
 	}
+	return 0;
+}
+
+class CandidateNumber
+{
+public:
+	int n;
+private:
+	const int MAX_NUM = 100 * 100;
+
+public:
+
+};
+bool isSumOfSquaresBelow(int n, int num_squares, int max_addend)
+{
+	if (num_squares == 1)
+	{
+		long double squareRoot = sqrt(n);
+		return ((squareRoot - floor(squareRoot)) == 0);
+	}
+	else
+	{
+		for (int i = 1; i * i < n; i++)
+		{
+			int candidate = n - i * i;
+			if (isSumOfSquaresBelow(candidate, num_squares - 1, max_addend))
+			{
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+unsigned long long p201()
+{
+	unsigned long long MIN_SUM = 0;
+	unsigned long long MAX_SUM = 0;
+	int S[100];
+	for (int i = 0; i < 100; i++)
+	{
+		S[i] = i * i;
+	}
+
+	// Results of sum go from 1^2 + 2^2 + ... + 50^2 to 51^2 + ... + 100^2
+	for (int i = 0; i < 50; i++)
+	{
+		MIN_SUM += S[i];
+	}
+	for (int i = 50; i < 100; i++)
+	{
+		MAX_SUM += S[i];
+	}
+
+	bool res = isSumOfSquaresBelow(MIN_SUM, 2, 2);
+
+	std::cout << MIN_SUM << (res ? "YES!" : "NU") << MAX_SUM << std::endl;
+
 	return 0;
 }
