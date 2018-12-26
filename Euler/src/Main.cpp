@@ -1,19 +1,21 @@
 #include <iostream>
 #include <chrono>
-#include "Solutions.h"
+#include "solutions/Solutions.h"
 #include <thread>
+
+#include "Tests.h"
 
 int main()
 {
-	unsigned long long sol = 0;
-
+	runTests(); return 0;
 	std::chrono::high_resolution_clock::time_point t1 = std::chrono::high_resolution_clock::now();
-	sol = p201();
+	p201 sol = p201();
+	long long a = sol.solve();
 	std::chrono::high_resolution_clock::time_point t2 = std::chrono::high_resolution_clock::now();
 
 	auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(t2 - t1).count();
 
-	std::cout << sol << std::endl;
+	//std::cout << sol << std::endl;
 	std::cout << duration << " millisec" << std::endl;
 
 	std::cin.get();

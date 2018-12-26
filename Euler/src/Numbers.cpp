@@ -1,4 +1,6 @@
 #include <iostream>
+#include <vector>
+#include <cmath>
 
 unsigned long long sumNumbersBelow(unsigned long long n)
 {
@@ -48,4 +50,71 @@ bool isPrime(unsigned long long n)
 			return false;
 
 	return true;
+}
+
+namespace Numbers {
+	bool isPerfectSquare(unsigned long long n)
+	{
+		long double squareRoot = std::sqrt(n);
+		return (squareRoot - std::floor(squareRoot) == 0);
+	}
+
+	bool isSqrtBelowOrEqual(unsigned long long n, unsigned long long max)
+	{
+		return std::sqrt(n) <= max;
+	}
+
+	bool isSumOfSquaresBelow(unsigned long long n, unsigned int numSquares, unsigned int maxAddend)
+	{
+		if (numSquares == 1)
+		{
+			return Numbers::isPerfectSquare(n) && Numbers::isSqrtBelowOrEqual(n, maxAddend);
+		}
+		else
+		{
+			for (unsigned int i = 1; i <= maxAddend && i*i < n; i++)
+			{
+				unsigned long long candidate = n - i*i;
+				if (Numbers::isSumOfSquaresBelow(candidate, numSquares - 1, maxAddend))
+				{
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	bool isSumOfExactlySquaresBelow(unsigned long long n, int numSquares, int maxAddend)
+	{
+		// TODO: Implement
+		while (numSquares--)
+		{
+			for (int i = 1; i <= maxAddend && i * i < n; i++)
+			{
+				unsigned long long candidate = n - i * i;
+				if (Numbers::isSumOfSquaresBelow(candidate, numSquares - 1, maxAddend))
+				{
+					return true;
+				}
+			}
+		}
+
+
+		if (numSquares == 1)
+		{
+			return Numbers::isPerfectSquare(n);
+		}
+		else
+		{
+			for (int i = 1; i <= maxAddend && i * i < n; i++)
+			{
+				unsigned long long candidate = n - i * i;
+				if (Numbers::isSumOfSquaresBelow(candidate, numSquares - 1, maxAddend))
+				{
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }
